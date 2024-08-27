@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+script() {
+  # Check if the user provided a filename and optional -x flag
+  if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+      echo "Usage: $0 [-x] <filename>"
+      exit 1
+  fi
+
+  # Initialize variables
+  make_executable=false
+  filename=""
+
+  # Handle arguments
+  if [ "$#" -eq 2 ]; then
+      if [ "$1" == "-x" ]; then
+          make_executable=true
+          filename="$2"
+      else
+          echo "Invalid option: $1"
+          echo "Usage: $0 [-x] <filename>"
+          exit 1
+      fi
+  else
+      filename="$1"
+  fi
+
+  # Create the bash script with shebang and set options
+  echo '#!/usr/bin/env bash' > "$filename"
+  echo 'set -euo pipefail' >> "$filename"
+
+  # Make the script executable if -x flag was provided
+  if [ "$make_executable" = true ]; then
+      chmod +x "$filename"
+      echo "Bash script '$filename' created and made executable."
+  else
+      echo "Bash script '$filename' created."
+  fi
+}
