@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-funcs_dir=funcs
+script_dir=$(dirname "$(realpath "$0")")
+funcs_dir="$script_dir/funcs"
 
+# SC1090 - https://www.shellcheck.net/wiki/SC1090
+# shellcheck source=/dev/null
 for file in "$funcs_dir"/*; do
   if [[ -f "$file" && -r "$file" ]]; then
     source "$file"
@@ -13,6 +16,7 @@ help() {
   echo "Commands:"
   echo "  script          Create template script file fitting bash best practices"
   echo "  yadm-force-add  Force add files to yadm that are already in another git repo"
+  echo "  ignore          Download template gitignore file for specified language"
   exit 0
 }
 
@@ -42,9 +46,12 @@ case "$1" in
     shift
     script "$@"
     ;;
+  ignore)
+    shift
+    ignore "$@"
+    ;;
   *)
     echo "Unknown command: $1"
     help
-    exit 1
     ;;
 esac

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ignore() {
+  
+  usage() {
+    echo "Usage: $0 [-i] language"
+    exit 1
+  }
+
+  if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
+    usage
+  fi
+
+  repo_url="https://github.com/github/gitignore"
+  branch="main"
+  raw_url="$repo_url/raw/$branch"
+
+  no_check_certificate=false
+  lang=""
+  if [ "$#" -eq 2 ]; then
+    if [ "$1" == "-i" ]; then
+      no_check_certificate=true
+      lang="$2"
+    else
+      echo "Invalid option: $1" 
+      usage
+    fi
+  else
+    lang="$1"
+  fi
+
+  lang=${lang^}
+
+  if [ "$no_check_certificate" = true ]; then
+    wget --no-check-certificate "$raw_url/$1.gitignore" -O ".gitignore" \
+      || echo "Download of template .gitignore file for language $lang failed"
+  else
+    wget --no-check-certificate "$raw_url/$1.gitignore" -O ".gitignore" \
+      || echo "Download of template .gitignore file for language $lang failed"
+  fi
+
+}
+
