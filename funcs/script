@@ -2,10 +2,15 @@
 set -euo pipefail
 
 script() {
+  
+  usage() {
+    echo "Usage: $0 [-x] <filename>"
+    exit 1
+  }
+
   # Check if the user provided a filename and optional -x flag
   if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-      echo "Usage: $0 [-x] <filename>"
-      exit 1
+      usage
   fi
 
   # Initialize variables
@@ -19,8 +24,7 @@ script() {
           filename="$2"
       else
           echo "Invalid option: $1"
-          echo "Usage: $0 [-x] <filename>"
-          exit 1
+          usage
       fi
   else
       filename="$1"
@@ -37,4 +41,5 @@ script() {
   else
       echo "Bash script '$filename' created."
   fi
+  
 }
