@@ -16,11 +16,11 @@ ignore() {
   branch="main"
   raw_url="$repo_url/raw/$branch"
 
-  no_check_certificate=false
+  check_cert_param=""
   lang=""
   if [ "$#" -eq 2 ]; then
     if [ "$1" == "-i" ]; then
-      no_check_certificate=true
+      check_cert_param="--no-check-certificate"
       lang="$2"
     else
       echo "Invalid option: $1" 
@@ -32,13 +32,8 @@ ignore() {
 
   lang=${lang^}
 
-  if [ "$no_check_certificate" = true ]; then
-    wget --no-check-certificate "$raw_url/$1.gitignore" -O ".gitignore" \
-      || echo "Download of template .gitignore file for language $lang failed"
-  else
-    wget --no-check-certificate "$raw_url/$1.gitignore" -O ".gitignore" \
-      || echo "Download of template .gitignore file for language $lang failed"
-  fi
+  wget "$check_cert_param" "$raw_url/$1.gitignore" -O ".gitignore" \
+    || echo "Download of template .gitignore file for language $lang failed"
 
 }
 
