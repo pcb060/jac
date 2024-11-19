@@ -32,7 +32,7 @@ ignore() {
 
   lang=${lang^}
 
-  wget "$check_cert_param" "$raw_url/$1.gitignore" -O ".gitignore" \
+  wget "$check_cert_param" -O ".gitignore" "$raw_url/$lang.gitignore" \
     || echo "Download of template .gitignore file for language $lang failed"
 
 }
