@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+_jac_describe_ignore() {
+  echo "Download template gitignore file for specified language"
+  exit 0
+}
+
 ignore() {
-  
   usage() {
-    echo "Usage: $0 [-i] language"
+    echo "Usage: ignore [-i] language"
     exit 1
   }
 
@@ -34,6 +38,5 @@ ignore() {
 
   wget "$check_cert_param" -O ".gitignore" "$raw_url/$lang.gitignore" \
     || echo "Download of template .gitignore file for language $lang failed"
-
 }
 

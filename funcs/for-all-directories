@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+_jac_describe_for-all-directories() {
+  echo "Execute command on all directories at current position"
+  exit 0
+}
+
+for-all-directories() {
+  local script_path="$(readlink -f "${BASH_SOURCE[0]}")"
+  local script_dir="$(dirname "$script_path")"
+  source "$script_dir/../utils/colors"
+  
+  local comm; comm="$@"
+  
+  for dir in */; do
+    [ -d "$dir" ] || continue
+    printf "%bExecuting %b\"%s\"%b in directory %b%s%b\n" "$cYELLOW" "$cCYAN" "$comm" "$cYELLOW" "$cBLUE" "${dir//\//}" "$cRESET"
+    (cd "$dir" && "$@" && echo)
+  done
+}

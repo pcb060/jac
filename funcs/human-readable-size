@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+_jac_describe_human-readable-size() {
+  echo "Print size of file in human-readable format"
+  exit 0
+}
+
+human-readable-size() {
+  usage() {
+    echo "Usage: human-readable-size [options] <file>"
+    echo "Options:"
+    echo "  -h, --help  Display this help message"
+    exit 1
+  }
+
+  if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    usage
+  fi
+
+  stat --format=%s $1 | numfmt --to=si --suffix=B
+}

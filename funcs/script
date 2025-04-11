@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+_jac_describe_script() {
+  echo "Create template script file fitting bash best practices"
+  exit 0
+}
+
 script() {
-  
   usage() {
-    echo "Usage: $0 [-x] <filename>"
+    echo "Usage: script [-x] <filename>"
+    echo "Options:"
+    echo "  -x  Make file executable"
     exit 1
   }
 
@@ -41,5 +47,4 @@ script() {
   else
       echo "Bash script '$filename' created."
   fi
-  
 }

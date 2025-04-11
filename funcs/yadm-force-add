@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-yadm_force_add() {
+_jac_describe_yadm-force-add() {
+  echo "Create template script file fitting bash best practices"
+  exit 0
+}
+
+yadm-force-add() {
   # A workaround for a bug where yadm won't add files
   # already in another git repo (probably a git issue).
   #

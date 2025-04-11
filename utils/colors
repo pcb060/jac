@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+cBLACK="$(tput setaf 0)"
+cRED="$(tput setaf 1)"
+cGREEN="$(tput setaf 2)"
+cYELLOW="$(tput setaf 3)"
+cBLUE="$(tput setaf 4)"
+cMAGENTA="$(tput setaf 5)"
+cCYAN="$(tput setaf 6)"
+cWHITE="$(tput setaf 7)"
+cRESET="$(tput sgr0)"
